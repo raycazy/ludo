@@ -1,0 +1,10 @@
+
+services:
+  - type: web
+    name: ludo-online
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    autoDeploy: true
+    healthCheckPath: /health

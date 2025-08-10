@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ludo Online</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Ludo Online</h1>
+      <div id="room-controls">
+        <button id="create-room">Create room</button>
+        <input id="room-code" placeholder="Room code" maxlength="8" />
+        <input id="player-name" placeholder="Your name" />
+        <button id="join-room">Join</button>
+      </div>
+      <div id="share" class="hidden"></div>
+    </header>
+
+    <main>
+      <section id="left">
+        <canvas id="board" width="700" height="700"></canvas>
+      </section>
+      <section id="right">
+        <div class="panel">
+          <div>Room: <span id="code"></span></div>
+          <div>Players</div>
+          <ul id="players"></ul>
+          <button id="start" class="hidden">Start game</button>
+          <hr/>
+          <div>Turn: <span id="turn"></span></div>
+          <button id="roll" disabled>Roll dice</button>
+          <div id="dice"></div>
+          <hr/>
+          <div class="log" id="log"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
