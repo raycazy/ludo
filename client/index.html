@@ -1,42 +1,129 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ludo Online</title>
+    <title>Ludo Online - Multiplayer Board Game</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
-    <header>
-      <h1>Ludo Online</h1>
-      <div id="room-controls">
-        <button id="create-room">Create room</button>
-        <input id="room-code" placeholder="Room code" maxlength="8" />
-        <input id="player-name" placeholder="Your name" />
-        <button id="join-room">Join</button>
-      </div>
-      <div id="share" class="hidden"></div>
-    </header>
-
-    <main>
-      <section id="left">
-        <canvas id="board" width="700" height="700"></canvas>
-      </section>
-      <section id="right">
-        <div class="panel">
-          <div>Room: <span id="code"></span></div>
-          <div>Players</div>
-          <ul id="players"></ul>
-          <button id="start" class="hidden">Start game</button>
-          <hr/>
-          <div>Turn: <span id="turn"></span></div>
-          <button id="roll" disabled>Roll dice</button>
-          <div id="dice"></div>
-          <hr/>
-          <div class="log" id="log"></div>
+    <div id="app">
+      <!-- Welcome Screen -->
+      <div id="welcome-screen" class="screen">
+        <div class="welcome-container">
+          <div class="welcome-header">
+            <h1><i class="fas fa-dice"></i> Ludo Online</h1>
+            <p>Play the classic board game with friends online!</p>
+          </div>
+          
+          <div class="welcome-actions">
+            <div class="action-card">
+              <i class="fas fa-plus-circle"></i>
+              <h3>Create Room</h3>
+              <p>Start a new game and invite friends</p>
+              <button id="create-room-btn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create New Game
+              </button>
+            </div>
+            
+            <div class="action-card">
+              <i class="fas fa-users"></i>
+              <h3>Join Room</h3>
+              <p>Enter a room code to join existing game</p>
+              <div class="join-form">
+                <input id="player-name" placeholder="Your name" maxlength="20" />
+                <input id="room-code" placeholder="Room code" maxlength="8" />
+                <button id="join-room-btn" class="btn btn-secondary">
+                  <i class="fas fa-sign-in-alt"></i> Join Game
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+
+      <!-- Game Screen -->
+      <div id="game-screen" class="screen hidden">
+        <header class="game-header">
+          <div class="header-left">
+            <button id="back-btn" class="btn-icon">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>Ludo Online</h2>
+          </div>
+          
+          <div class="room-info">
+            <div class="room-code">
+              <span>Room:</span>
+              <code id="code"></code>
+              <button id="copy-link" class="btn-icon" title="Copy link">
+                <i class="fas fa-link"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="header-right">
+            <div class="player-count">
+              <i class="fas fa-users"></i>
+              <span id="player-count">0/4</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="game-main">
+          <div class="game-board-container">
+            <canvas id="board" width="800" height="800"></canvas>
+            <div id="game-overlay" class="hidden">
+              <div class="overlay-content">
+                <h3 id="overlay-title"></h3>
+                <p id="overlay-message"></p>
+                <button id="overlay-action" class="btn btn-primary"></button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="game-sidebar">
+            <div class="sidebar-section">
+              <h3><i class="fas fa-users"></i> Players</h3>
+              <div id="players" class="players-list"></div>
+              <button id="start-game" class="btn btn-success hidden">
+                <i class="fas fa-play"></i> Start Game
+              </button>
+            </div>
+            
+            <div class="sidebar-section">
+              <h3><i class="fas fa-gamepad"></i> Game Controls</h3>
+              <div class="game-status">
+                <div class="turn-info">
+                  <span>Turn:</span>
+                  <span id="turn" class="turn-player"></span>
+                </div>
+                <button id="roll-dice" class="btn btn-primary" disabled>
+                  <i class="fas fa-dice"></i> Roll Dice
+                </button>
+              </div>
+              
+              <div id="dice-container" class="dice-container hidden">
+                <div class="dice">
+                  <span id="dice-value"></span>
+                </div>
+                <p class="dice-message">Select a piece to move</p>
+              </div>
+            </div>
+            
+            <div class="sidebar-section">
+              <h3><i class="fas fa-history"></i> Game Log</h3>
+              <div id="log" class="game-log"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
 
     <script src="main.js"></script>
   </body>
